@@ -1,7 +1,11 @@
 package com.eosr14.kakaoimagesearch.common.base
 
 import android.annotation.SuppressLint
+import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.eosr14.kakaoimagesearch.R
+import com.eosr14.kakaoimagesearch.common.ProgressDialog
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 
@@ -9,15 +13,25 @@ import io.reactivex.disposables.Disposable
 open class BaseActivity : AppCompatActivity() {
 
     private val compositeDisposable = CompositeDisposable()
+    protected lateinit var progressDialog: ProgressDialog
 
-    protected fun addDisposable(disposable: Disposable) {
-        compositeDisposable.add(disposable)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        progressDialog = ProgressDialog(this)
     }
 
     override fun onDestroy() {
         compositeDisposable.clear()
         compositeDisposable.dispose()
         super.onDestroy()
+    }
+
+    fun addDisposable(disposable: Disposable) {
+        compositeDisposable.add(disposable)
+    }
+
+    fun showNetworkErrorToast() {
+        Toast.makeText(this, R.string.error_network_message, Toast.LENGTH_SHORT).show()
     }
 
 }

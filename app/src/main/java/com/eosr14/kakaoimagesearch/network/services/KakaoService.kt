@@ -10,7 +10,7 @@ import retrofit2.http.*
 interface KakaoService {
 
     @Headers("Authorization: KakaoAK $KAKAO_REST_API_KEY")
-    @GET("/v2/search/")
+    @GET("/v2/search/image")
     fun requestKakaoSearch(@Query("query") query: String) : Single<KakaoImage>
 
 //    fun requestKakaoSearch(

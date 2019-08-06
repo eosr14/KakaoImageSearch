@@ -2,6 +2,7 @@ package com.eosr14.kakaoimagesearch.network
 
 import android.util.Log
 import com.eosr14.kakaoimagesearch.BuildConfig
+import okhttp3.CookieJar
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -34,6 +35,7 @@ class RetrofitClient {
             .connectTimeout(CONNECT_TIMEOUT, TimeUnit.SECONDS)
             .readTimeout(WRITE_TIMEOUT, TimeUnit.SECONDS)
             .writeTimeout(READ_TIMEOUT, TimeUnit.SECONDS)
+            .cookieJar(CookieJar.NO_COOKIES)
             .build()
     }
 

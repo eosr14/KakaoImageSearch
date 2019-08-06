@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">KakaoImageSearch</string>
     <string name="main_search_hint">검색어를 입력해주세요…</string>
+    <string name="error_network_message">네트워크에 접속할 수 없습니다.\n네트워크 연결 상태를 확인해주세요.</string>
 </resources>
