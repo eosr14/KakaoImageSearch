@@ -11,9 +11,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 import com.eosr14.kakaoimagesearch.R
+import com.eosr14.kakaoimagesearch.common.VerticalMarginDecoration
 import com.eosr14.kakaoimagesearch.common.base.BaseActivity
 import com.eosr14.kakaoimagesearch.common.base.BaseRecyclerViewAdapter
 import com.eosr14.kakaoimagesearch.databinding.ActivityMainBinding
+import com.eosr14.kakaoimagesearch.ui.detail.DetailActivity
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.activity_main.*
@@ -22,7 +24,6 @@ import java.util.concurrent.TimeUnit
 class MainActivity : BaseActivity(), MainViewModelInterface {
 
     private lateinit var mainViewModel: MainViewModel
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,8 +60,7 @@ class MainActivity : BaseActivity(), MainViewModelInterface {
             layoutManager = LinearLayoutManager(context).apply { orientation = RecyclerView.VERTICAL }
             adapter = MainListAdapter(object : BaseRecyclerViewAdapter.OnItemClickListener {
                 override fun onItemClick(view: View, position: Int, adapter: BaseRecyclerViewAdapter<*, *>) {
-                    Toast.makeText(this@MainActivity, "아이템 클릭 테스트 Position = $position", Toast.LENGTH_SHORT).show()
-//                    mainViewModel.onClickReservation((adapter as ReservationListAdapter).getItem(position))
+                    DetailActivity.startActivity(context, (adapter as MainListAdapter).getItem(position))
                 }
             })
         }
@@ -75,7 +75,7 @@ class MainActivity : BaseActivity(), MainViewModelInterface {
         })
     }
 
-    private fun onTextChangeListener(listener:(CharSequence)->Unit) : TextWatcher {
+    private fun onTextChangeListener(listener: (CharSequence) -> Unit): TextWatcher {
         return object: TextWatcher {
             override fun afterTextChanged(text: Editable?) { }
             override fun beforeTextChanged(text: CharSequence?, start: Int, count: Int, after: Int) { }
@@ -86,21 +86,9 @@ class MainActivity : BaseActivity(), MainViewModelInterface {
     }
 
     // MainViewModelInterface [--
-    override fun updateRecyclerView() {
-//        android.util.Log.d("eosr14", "updateRecyclerView 111")
-//        recyclerview_main.adapter?.notifyDataSetChanged()
-    }
-//    override fun updateRecyclerView() {
-//        recyclerview_main.run {
-//            layoutManager = LinearLayoutManager(context).apply { orientation = RecyclerView.VERTICAL }
-//            adapter = MainListAdapter(object : BaseRecyclerViewAdapter.OnItemClickListener {
-//                override fun onItemClick(view: View, position: Int, adapter: BaseRecyclerViewAdapter<*, *>) {
-//                    Toast.makeText(this@MainActivity, "아이템 클릭 테스트 Position = $position", Toast.LENGTH_SHORT).show()
-////                    mainViewModel.onClickReservation((adapter as ReservationListAdapter).getItem(position))
-//                }
-//            })
-//        }
-//    }
+    override fun showErrorToast() = showNetworkErrorToast()
+
+    override fun scrollTop() = recyclerview_main.scrollToPosition(0)
     // --] MainViewModelInterface
 
 }

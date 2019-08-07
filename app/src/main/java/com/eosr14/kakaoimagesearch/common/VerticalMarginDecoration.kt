@@ -1,4 +1,4 @@
-package com.eosr14.kakaoimagesearch.ui.main
+package com.eosr14.kakaoimagesearch.common
 
 import android.content.Context
 import android.graphics.Rect

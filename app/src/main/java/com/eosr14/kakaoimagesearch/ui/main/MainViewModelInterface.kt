@@ -1,5 +1,6 @@
 package com.eosr14.kakaoimagesearch.ui.main
 
 interface MainViewModelInterface {
-    fun updateRecyclerView()
+    fun showErrorToast()
+    fun scrollTop()
 }

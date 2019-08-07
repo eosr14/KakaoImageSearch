@@ -15,22 +15,28 @@ class MainViewModel(
     private val _searchList = MutableLiveData<List<KakaoImage.Documents>>(mutableListOf())
     val searchList: LiveData<List<KakaoImage.Documents>> get() = _searchList
 
+    private val _isSearchEmpty = MutableLiveData(false)
+    val isSearchEmpty: LiveData<Boolean> get() = _isSearchEmpty
+
+    private val _searchText = MutableLiveData("")
+    val searchText: LiveData<String> get() = _searchText
+
     fun requestSearchImage(text: CharSequence) {
         progress.value = true
+        _searchText.value = text.toString()
+        mainViewModelInterface.scrollTop()
 
         addDisposable(
             RetrofitManager.requestImageSearch(text.toString())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ kakaoImage ->
-                    android.util.Log.d("eosr14", "kakaolist size = ${kakaoImage.documents.size}")
-//                    searchList.value = kakaoImage.documents
                     _searchList.value = kakaoImage.documents
+                    _isSearchEmpty.value = kakaoImage.documents.isEmpty()
                     progress.value = false
-                    mainViewModelInterface.updateRecyclerView()
-
-                }, { exception ->
-                    android.util.Log.d("eosr14", "Error message = ${exception.message}")
+                }, {
+                    mainViewModelInterface.showErrorToast()
+                    _isSearchEmpty.value = true
                     progress.value = false
                 })
         )
