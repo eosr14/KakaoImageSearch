@@ -8,6 +8,7 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.eosr14.kakaoimagesearch.model.KakaoImage
 import com.eosr14.kakaoimagesearch.ui.main.MainListAdapter
+import com.eosr14.kakaoimagesearch.ui.main.MainViewModel
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.drawee.controller.BaseControllerListener
 import com.facebook.drawee.view.SimpleDraweeView
@@ -19,14 +20,37 @@ import com.facebook.imagepipeline.request.ImageRequestBuilder
 object DataBindingComponents {
 
     @JvmStatic
-    @BindingAdapter("searchItems")
-    fun setSearchItems(recyclerView: RecyclerView, items: MutableList<KakaoImage.Documents>) {
+    @BindingAdapter("searchItems", "isScrollBottom")
+    fun setSearchItems(
+        recyclerView: RecyclerView,
+        items: MutableList<KakaoImage.Documents>,
+        isScrollBottom: Boolean
+    ) {
         recyclerView.adapter?.let { adapter ->
             if (adapter is MainListAdapter) {
-                adapter.setItems(items)
+                when (isScrollBottom) {
+                    true -> adapter.pushItems(items)
+                    false -> adapter.setItems(items)
+                }
                 recyclerView.scheduleLayoutAnimation()
             }
         }
+    }
+
+    @JvmStatic
+    @BindingAdapter("scrollBottomListener")
+    fun setScrollBottomListener(recyclerView: RecyclerView, viewModel: MainViewModel) {
+        recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                val isEnd = viewModel.isEnd.value ?: false
+                val page = viewModel.page.value ?: 1
+
+                if (!recyclerView.canScrollVertically(1) && page < MAX_PAGE_COUNT && !isEnd) {
+                    android.util.Log.d("eosr14", "requestTest")
+                    viewModel.requestSearchImage(viewModel.searchText.value ?: "", true)
+                }
+            }
+        })
     }
 
     @JvmStatic

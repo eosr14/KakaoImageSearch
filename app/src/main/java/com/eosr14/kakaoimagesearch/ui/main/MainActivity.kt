@@ -51,7 +51,7 @@ class MainActivity : BaseActivity(), MainViewModelInterface {
                 .filter { text -> text.isNotEmpty() }
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe { text ->
-                    mainViewModel.requestSearchImage(text)
+                    mainViewModel.requestSearchImage(text, false)
                 }
         )
 
@@ -87,8 +87,6 @@ class MainActivity : BaseActivity(), MainViewModelInterface {
 
     // MainViewModelInterface [--
     override fun showErrorToast() = showNetworkErrorToast()
-
-    override fun scrollTop() = recyclerview_main.scrollToPosition(0)
     // --] MainViewModelInterface
 
 }

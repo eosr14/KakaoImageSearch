@@ -2,6 +2,7 @@ package com.eosr14.kakaoimagesearch.common.base
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
+import com.eosr14.kakaoimagesearch.model.KakaoImage
 
 abstract class BaseRecyclerViewAdapter<T, H : RecyclerView.ViewHolder> :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -71,16 +72,8 @@ abstract class BaseRecyclerViewAdapter<T, H : RecyclerView.ViewHolder> :
     }
 
     fun pushItems(items: MutableList<T>) {
-        val list = listItems
-
-        val newList: MutableList<T> = mutableListOf()
-        newList.addAll(items)
-        newList.addAll(list)
-
-        listItems.clear()
-        listItems = newList
-
-        notifyDataSetChanged()
+        listItems.addAll(items)
+        notifyItemInserted(listItems.size)
     }
 
     protected open fun preProcessOnBindView(holder: RecyclerView.ViewHolder, position: Int) {}
