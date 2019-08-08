@@ -2,6 +2,7 @@ package com.eosr14.kakaoimagesearch.ui.detail
 
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import com.eosr14.kakaoimagesearch.R
@@ -25,6 +26,11 @@ class DetailActivity : BaseActivity(), DetailViewModelInterface {
             lifecycleOwner = this@DetailActivity
         }
     }
+
+    // [-- DetailViewModelInterface
+    override fun openWebBrowser(docUrl: String) =
+        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(docUrl)))
+    // --] DetailViewModelInterface
 
     companion object {
         private const val EXTRA_KAKAO_DOCUMENT = "kakaoDocument"

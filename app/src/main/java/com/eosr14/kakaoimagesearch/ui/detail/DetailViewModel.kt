@@ -13,4 +13,6 @@ class DetailViewModel(
     private val _document = MutableLiveData(originalDocument)
     val document: LiveData<KakaoImage.Documents> get() = _document
 
+    fun onDetailSubItemClick(docUrl: String) = detailViewModelInterface.openWebBrowser(docUrl)
+
 }

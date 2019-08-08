@@ -23,6 +23,7 @@
             android:id="@+id/layout_main_search"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:hint="@string/main_search_hint"
             android:orientation="horizontal"
             app:layout_constraintLeft_toLeftOf="parent"

@@ -3,6 +3,7 @@ package com.eosr14.kakaoimagesearch.common
 import android.graphics.drawable.Animatable
 import android.net.Uri
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.eosr14.kakaoimagesearch.model.KakaoImage
@@ -29,8 +30,8 @@ object DataBindingComponents {
     }
 
     @JvmStatic
-    @BindingAdapter("searchImage")
-    fun setSearchImage(view: SimpleDraweeView, url: String) {
+    @BindingAdapter("urlToImage")
+    fun setUrlToImage(view: SimpleDraweeView, url: String) {
         val imageRequest = ImageRequestBuilder
             .newBuilderWithSource(Uri.parse(url))
             .setRotationOptions(RotationOptions.autoRotate())
@@ -56,6 +57,12 @@ object DataBindingComponents {
             }
             this.build()
         }
+    }
+
+    @JvmStatic
+    @BindingAdapter("displayDate")
+    fun setDisPlayDate(textView: TextView, dateTime: String) {
+        textView.text = convertDisplayDate(dateTime)
     }
 
 }

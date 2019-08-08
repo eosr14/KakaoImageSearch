@@ -30,7 +30,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:placeholderImage="@drawable/loading"
                 app:placeholderImageScaleType="fitXY"
-                app:searchImage="@{document.imageUrl}" />
+                app:urlToImage="@{document.imageUrl}" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

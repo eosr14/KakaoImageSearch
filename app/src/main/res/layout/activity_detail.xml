@@ -10,26 +10,75 @@
             type="com.eosr14.kakaoimagesearch.ui.detail.DetailViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:animateLayoutChanges="true"
-        tools:context=".ui.detail.DetailActivity">
+        android:layout_height="wrap_content">
 
-        <com.facebook.drawee.view.SimpleDraweeView
-            android:id="@+id/imageview_detail"
-            android:layout_width="0dp"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:minHeight="@dimen/image_default_height"
-            app:failureImage="@drawable/error_image"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:placeholderImage="@drawable/loading"
-            app:placeholderImageScaleType="fitXY"
-            app:searchImage="@{viewModel.document.imageUrl}"/>
+            android:animateLayoutChanges="true"
+            tools:context=".ui.detail.DetailActivity">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/imageview_detail"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:minHeight="@dimen/image_default_height"
+                app:failureImage="@drawable/error_image"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:urlToImage="@{viewModel.document.imageUrl}" />
 
+            <View
+                android:id="@+id/view_detail_sub_background"
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:layout_margin="10dp"
+                android:background="@drawable/selector_background"
+                android:onClick="@{() -> viewModel.onDetailSubItemClick(viewModel.document.docUrl)}"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageview_detail" />
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/imageview_detail_sub_thumbnail"
+                android:layout_width="80dp"
+                android:layout_height="0dp"
+                android:padding="10dp"
+                app:layout_constraintBottom_toBottomOf="@id/view_detail_sub_background"
+                app:layout_constraintLeft_toLeftOf="@id/view_detail_sub_background"
+                app:layout_constraintTop_toTopOf="@id/view_detail_sub_background"
+                app:roundAsCircle="true"
+                app:roundingBorderColor="@color/gray"
+                app:urlToImage="@{viewModel.document.thumbnailUrl}" />
+
+            <TextView
+                android:id="@+id/textview_detail_sub_display_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="@{@string/detail_display_name(viewModel.document.displaySiteName, viewModel.document.width, viewModel.document.height)}"
+                app:layout_constraintBottom_toTopOf="@id/textview_detail_sub_date"
+                app:layout_constraintLeft_toRightOf="@id/imageview_detail_sub_thumbnail"
+                app:layout_constraintRight_toRightOf="@id/view_detail_sub_background"
+                app:layout_constraintTop_toTopOf="@id/view_detail_sub_background" />
+
+            <TextView
+                android:id="@+id/textview_detail_sub_date"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="test2"
+                app:displayDate="@{viewModel.document.dateTime}"
+                app:layout_constraintBottom_toBottomOf="@id/view_detail_sub_background"
+                app:layout_constraintLeft_toRightOf="@id/imageview_detail_sub_thumbnail"
+                app:layout_constraintRight_toRightOf="@id/view_detail_sub_background"
+                app:layout_constraintTop_toBottomOf="@id/textview_detail_sub_display_name" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
 
 </layout>

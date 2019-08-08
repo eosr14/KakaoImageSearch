@@ -14,8 +14,8 @@ data class KakaoImage(
         @SerializedName("collection")
         val collection: String = "",
 
-        @SerializedName("dataTime")
-        val datetime: String = "",
+        @SerializedName("datetime")
+        val dateTime: String = "",
 
         @SerializedName("display_sitename")
         val displaySiteName: String = "",
