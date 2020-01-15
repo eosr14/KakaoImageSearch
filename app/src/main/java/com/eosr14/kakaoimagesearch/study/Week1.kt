@@ -2,13 +2,16 @@ package com.eosr14.kakaoimagesearch.study
 
 import android.content.Context
 import android.util.TypedValue
+import com.eosr14.kakaoimagesearch.KakaoImageSearchApplication
 
-class Week1(
+object class Week1(
     private val context: Context
 ) {
     /**
      * 변수 선언
      */
+    val value = ""
+    var variable = 0L
 
     /**
      * 기본 자료형
@@ -49,10 +52,48 @@ class Week1(
     val floatingPointToDouble: Double get() = 123.5 // 123.5e10
     val floatingPointToFloat : Float get() = 123.5F // 123.5f
 
+    // 언더스코어로 자릿값 구분
+    val number = 1_000_000_000
+    val cardNum = 1234_1234_1234_1234L
+    val hexVal = 0xAB_CD_EF_12
+
     /**
      * 자료형 (문자)
      */
     val yellowToString = "yellow"
     val yToChar = 'y'
 
+    val str1 : String = "H"
+    val str2 = "W"
+    var str3 = "H"
+
+    class inner1 {
+        var userName = "kh.shin"
+    }
+
+    fun strPrint() {
+        println("str1 == str3 : ${str1 === str2}") // false
+        println("str1 == str3 : ${str1 === str3}") // true
+    }
+
 }
+
+/**
+ * typeAlias
+ */
+class A {
+    inner class Inner
+}
+
+class B {
+    inner class Inner
+}
+
+typealias set = Set<String>
+typealias onClickListener = (Int, String, Any) -> Unit
+typealias AInner = A.Inner
+typealias BInner = B.Inner
+typealias UserName = String
+typealias Password = Int
+
+  - 제네릭, 고차함수 및 람다식, 클래스 등에서 별칭을 사용할 수 있다.
