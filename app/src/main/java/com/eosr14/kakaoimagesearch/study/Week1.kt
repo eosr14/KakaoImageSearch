@@ -2,9 +2,8 @@ package com.eosr14.kakaoimagesearch.study
 
 import android.content.Context
 import android.util.TypedValue
-import com.eosr14.kakaoimagesearch.KakaoImageSearchApplication
 
-object class Week1(
+class Week1(
     private val context: Context
 ) {
     /**
@@ -50,7 +49,7 @@ object class Week1(
 
     // 부동소수점 지원
     val floatingPointToDouble: Double get() = 123.5 // 123.5e10
-    val floatingPointToFloat : Float get() = 123.5F // 123.5f
+    val floatingPointToFloat: Float get() = 123.5F // 123.5f
 
     // 언더스코어로 자릿값 구분
     val number = 1_000_000_000
@@ -58,22 +57,51 @@ object class Week1(
     val hexVal = 0xAB_CD_EF_12
 
     /**
-     * 자료형 (문자)
+     * 자료형 (기본형과 참조형 자료형의 비교)
      */
     val yellowToString = "yellow"
     val yToChar = 'y'
 
-    val str1 : String = "H"
+    val str1: String = "H"
     val str2 = "W"
     var str3 = "H"
 
-    class inner1 {
-        var userName = "kh.shin"
-    }
+    val number1: Int = 128
+    val number2: Int? = 128
 
     fun strPrint() {
-        println("str1 == str3 : ${str1 === str2}") // false
-        println("str1 == str3 : ${str1 === str3}") // true
+        println("str1 === str3 : ${str1 === str2}") // false
+        println("str1 === str3 : ${str1 === str3}") // true
+
+        println("number1 == number2 : ${number1 == number2}") // true
+        println("number1 === number2 : ${number1 === number2}") // false
+    }
+
+    val number3: Number = 12.2F // Float 형으로 스마트캐스트
+    val str4: String = number3 as String
+
+    fun smartCastWithIsAs() {
+        when (number3) {
+            is Int -> print("int = $number3")
+            is Float -> print("float = $number3")
+        }
+
+        print(str4)
+    }
+
+    val object1: Any = 1 // Int형
+    val object2: Any = 20L // Long형
+
+    fun checkObject(type: Any) {
+        when (type) {
+            is String -> {  }
+            is Int -> {  }
+        }
+    }
+
+    fun main() {
+        checkObject("Hello")
+        checkObject(5)
     }
 
 }
@@ -95,5 +123,3 @@ typealias AInner = A.Inner
 typealias BInner = B.Inner
 typealias UserName = String
 typealias Password = Int
-
-  - 제네릭, 고차함수 및 람다식, 클래스 등에서 별칭을 사용할 수 있다.
