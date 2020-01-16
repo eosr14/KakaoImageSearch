@@ -36,6 +36,7 @@ class MainViewModel(
         _searchText.value = text.toString()
         _isScrollBottom.value = isBottom
 
+
         when (isBottom) {
             true -> _page.value = _page.value?.plus(1)
             false -> _page.value = 1
@@ -58,6 +59,10 @@ class MainViewModel(
                     })
             )
         }
+    }
+
+    fun getSearchText(): String {
+        return _searchText.value ?: ""
     }
 
 }

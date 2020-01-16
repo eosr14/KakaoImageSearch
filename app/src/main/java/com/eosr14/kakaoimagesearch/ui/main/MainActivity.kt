@@ -40,14 +40,14 @@ class MainActivity : BaseActivity(), MainViewModelInterface {
     }
 
     private fun bindView() {
-        val editText = Observable.create<CharSequence> { emitter ->
+        val editTextObservable = Observable.create<CharSequence> { emitter ->
             edittext_main_search.run {
                 addTextChangedListener(onTextChangeListener { text -> emitter.onNext(text) })
             }
         }
 
         mainViewModel.addDisposable(
-            editText.debounce(1000L, TimeUnit.MILLISECONDS)
+            editTextObservable.debounce(1000L, TimeUnit.MILLISECONDS)
                 .filter { text -> text.isNotEmpty() }
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe { text ->
@@ -72,6 +72,16 @@ class MainActivity : BaseActivity(), MainViewModelInterface {
                     false -> progressDialog.cancel()
                 }
             }
+        })
+
+        mainViewModel.searchText.observe(this@MainActivity, Observer {
+            textview_summery.text =
+                it?.let {
+                    when {
+                        it.isNotEmpty() -> String.format(resources.getString(R.string.main_search_summery), it)
+                        else -> ""
+                    }
+                } ?: ""
         })
     }
 

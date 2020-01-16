@@ -2,6 +2,7 @@
     <string name="app_name">KakaoImageSearch</string>
     <string name="main_search_hint">검색어를 입력해주세요…</string>
     <string name="main_search_empty">%s와(과) 일치하는\n검색결과가 없습니다.</string>
+    <string name="main_search_summery">%s의 검색결과 입니다.</string>
     <string name="detail_display_name">%s | %s X %s</string>
     <string name="error_network_message">네트워크에 접속할 수 없습니다.\n네트워크 연결 상태를 확인해주세요.</string>
 </resources>
