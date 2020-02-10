@@ -17,5 +17,7 @@ class DetailViewModel(
 
     fun test() {
         println("a")
+        println("b")
+        println("c")
     }
 }
