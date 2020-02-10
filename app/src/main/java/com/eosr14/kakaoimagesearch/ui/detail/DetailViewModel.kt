@@ -15,4 +15,7 @@ class DetailViewModel(
 
     fun onDetailSubItemClick(docUrl: String) = detailViewModelInterface.openWebBrowser(docUrl)
 
+    fun test() {
+        println("a")
+    }
 }
