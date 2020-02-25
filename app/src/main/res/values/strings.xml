@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">KakaoImageSearch</string>
+    <string name="app_name">카카오 이미지 검색</string>
     <string name="main_search_hint">검색어를 입력해주세요…</string>
     <string name="main_search_empty">%s와(과) 일치하는\n검색결과가 없습니다.</string>
     <string name="detail_display_name">%s | %s X %s</string>
