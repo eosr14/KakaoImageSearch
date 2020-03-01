@@ -10,12 +10,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.eosr14.kakaoimagesearch.R
 import com.eosr14.kakaoimagesearch.common.VerticalMarginDecoration
-import com.eosr14.kakaoimagesearch.common.analytics.ApplicationAnalytics
+import com.eosr14.kakaoimagesearch.common.analytics.AnalyticsManager
+import com.eosr14.kakaoimagesearch.common.analytics.JPEvent
 import com.eosr14.kakaoimagesearch.common.base.BaseActivity
 import com.eosr14.kakaoimagesearch.common.base.BaseRecyclerViewAdapter
 import com.eosr14.kakaoimagesearch.databinding.ActivityMainBinding
 import com.eosr14.kakaoimagesearch.ui.detail.DetailActivity
-import com.google.firebase.analytics.FirebaseAnalytics
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.activity_main.*
@@ -24,7 +24,6 @@ import java.util.concurrent.TimeUnit
 class MainActivity : BaseActivity(), MainViewModelInterface {
 
     private lateinit var mainViewModel: MainViewModel
-    private val applicationAnalytics = ApplicationAnalytics(this@MainActivity)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,12 +51,7 @@ class MainActivity : BaseActivity(), MainViewModelInterface {
                 .filter { text -> text.isNotEmpty() }
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe { term ->
-                    applicationAnalytics.sendEventLog(
-                        FirebaseAnalytics.Event.SEARCH,
-                        Bundle().apply {
-                            putString(FirebaseAnalytics.Param.SEARCH_TERM, term.toString())
-                        }
-                    )
+                    AnalyticsManager.getInstance().sendLog(JPEvent.Search(term.toString()))
                     mainViewModel.requestSearchImage(term, false)
                 }
         )
