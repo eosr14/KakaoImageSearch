@@ -2,6 +2,9 @@ package com.eosr14.kakaoimagesearch
 
 import android.app.Application
 import android.content.Context
+import com.eosr14.kakaoimagesearch.common.analytics.AnalyticsManager
+import com.eosr14.kakaoimagesearch.common.analytics.FirebaseProvider
+import com.eosr14.kakaoimagesearch.common.analytics.JPAnalyticsProvider
 import com.eosr14.kakaoimagesearch.network.RetrofitClient
 import com.facebook.cache.disk.DiskCacheConfig
 import com.facebook.drawee.backends.pipeline.Fresco
@@ -15,6 +18,11 @@ class KakaoImageSearchApplication : Application() {
         super.onCreate()
         instance = this
         Fresco.initialize(this, getImagePipelineConfig(this))
+
+        AnalyticsManager.getInstance().apply {
+            this.register(FirebaseProvider(this@KakaoImageSearchApplication))
+            this.register(JPAnalyticsProvider(this@KakaoImageSearchApplication))
+        }
     }
 
     private fun getImagePipelineConfig(context: Context): ImagePipelineConfig {

@@ -40,8 +40,7 @@ class RetrofitClient {
     }
 
     private fun provideHttpLoggingInterceptor(): HttpLoggingInterceptor {
-        val httpLoggingInterceptor =
-            HttpLoggingInterceptor(HttpLoggingInterceptor.Logger { message -> Log.d(tag, message) })
+        val httpLoggingInterceptor = HttpLoggingInterceptor()
         httpLoggingInterceptor.level = if (BuildConfig.DEBUG) BODY else NONE
         return httpLoggingInterceptor
     }
