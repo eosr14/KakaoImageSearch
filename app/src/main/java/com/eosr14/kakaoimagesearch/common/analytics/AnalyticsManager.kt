@@ -34,7 +34,18 @@ class AnalyticsManager<T : EventType> : AnalyticsType<T> {
     }
 
     companion object {
-        fun getInstance() = AnalyticsManager<JPEvent>()
+        private lateinit var instance: AnalyticsManager<JPEvent>
+
+        fun initialize() {
+            instance = AnalyticsManager<JPEvent>()
+        }
+
+        fun getInstance(): AnalyticsManager<JPEvent> {
+            return when (::instance.isInitialized) {
+                true -> instance
+                false -> AnalyticsManager<JPEvent>()
+            }
+        }
     }
 
 }

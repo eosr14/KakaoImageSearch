@@ -46,7 +46,6 @@ object DataBindingComponents {
                 val page = viewModel.page.value ?: 1
 
                 if (!recyclerView.canScrollVertically(1) && page < MAX_PAGE_COUNT && !isEnd) {
-                    android.util.Log.d("eosr14", "requestTest")
                     viewModel.requestSearchImage(viewModel.searchText.value ?: "", true)
                 }
             }
