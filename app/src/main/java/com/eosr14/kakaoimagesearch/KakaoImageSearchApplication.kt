@@ -19,6 +19,7 @@ class KakaoImageSearchApplication : Application() {
         instance = this
         Fresco.initialize(this, getImagePipelineConfig(this))
 
+        AnalyticsManager.initialize()
         AnalyticsManager.getInstance().apply {
             this.register(FirebaseProvider(this@KakaoImageSearchApplication))
             this.register(JPAnalyticsProvider(this@KakaoImageSearchApplication))
