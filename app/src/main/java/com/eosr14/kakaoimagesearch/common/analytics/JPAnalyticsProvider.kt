@@ -1,27 +1,28 @@
 package com.eosr14.kakaoimagesearch.common.analytics
 
 import android.content.Context
-import android.os.Bundle
 import androidx.work.Data
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 
 class JPAnalyticsProvider(private val context: Context) : ProviderType {
-    override fun sendLog(event: String, parameter: Bundle) {
-        val event = Data.Builder().apply {
-            putString(KEY_EVENT, event)
-        }
-        val parameter = Data.Builder().apply {
-            parameter.keySet().forEach { key ->
-                putString(key, parameter.getString(key))
+    override fun sendLog(event: String, parameter: HashMap<String, Any>) {
+        val eventAndParams = Data.Builder().apply {
+            this.putString(KEY_EVENT, event)
+
+            parameter.entries.forEach {
+                this.putString(it.key, it.value.toString())
             }
         }
 
         OneTimeWorkRequestBuilder<JPAnalyticsWorker>()
-            .setInputData(event.build())
-            .setInputData(parameter.build())
+            .setInputData(eventAndParams.build())
             .build().apply {
                 WorkManager.getInstance(context).enqueue(this)
             }
+    }
+
+    override fun sendUserProperty(key: String, value: String) {
+        // TODO : Send User Property
     }
 }

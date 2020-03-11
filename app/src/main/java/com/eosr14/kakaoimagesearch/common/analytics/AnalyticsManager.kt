@@ -1,22 +1,6 @@
 package com.eosr14.kakaoimagesearch.common.analytics
 
-import android.os.Bundle
-
-interface ProviderType {
-    fun sendLog(event: String, parameter: Bundle)
-}
-
-interface EventType {
-    fun eventName(provider: ProviderType): String
-    fun parameters(provider: ProviderType): Bundle
-}
-
-interface AnalyticsType<T> {
-    fun register(provider: ProviderType)
-    fun sendLog(event: T)
-}
-
-class AnalyticsManager<T : EventType> : AnalyticsType<T> {
+object AnalyticsManager : AnalyticsType {
 
     private val providers: ArrayList<ProviderType> = arrayListOf()
 
@@ -24,27 +8,9 @@ class AnalyticsManager<T : EventType> : AnalyticsType<T> {
         providers.add(provider)
     }
 
-    override fun sendLog(event: T) {
+    override fun sendLog(eventName: String, parameter: HashMap<String, Any>) {
         providers.forEach { provider ->
-            provider.sendLog(
-                event.eventName(provider),
-                event.parameters(provider)
-            )
-        }
-    }
-
-    companion object {
-        private lateinit var instance: AnalyticsManager<JPEvent>
-
-        fun initialize() {
-            instance = AnalyticsManager<JPEvent>()
-        }
-
-        fun getInstance(): AnalyticsManager<JPEvent> {
-            return when (::instance.isInitialized) {
-                true -> instance
-                false -> AnalyticsManager<JPEvent>()
-            }
+            provider.sendLog(eventName, parameter)
         }
     }
 

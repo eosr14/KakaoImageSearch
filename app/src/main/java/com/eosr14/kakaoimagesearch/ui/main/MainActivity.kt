@@ -11,11 +11,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.eosr14.kakaoimagesearch.R
 import com.eosr14.kakaoimagesearch.common.VerticalMarginDecoration
 import com.eosr14.kakaoimagesearch.common.analytics.AnalyticsManager
-import com.eosr14.kakaoimagesearch.common.analytics.JPEvent
 import com.eosr14.kakaoimagesearch.common.base.BaseActivity
 import com.eosr14.kakaoimagesearch.common.base.BaseRecyclerViewAdapter
 import com.eosr14.kakaoimagesearch.databinding.ActivityMainBinding
 import com.eosr14.kakaoimagesearch.ui.detail.DetailActivity
+import com.google.firebase.analytics.FirebaseAnalytics
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.activity_main.*
@@ -51,7 +51,13 @@ class MainActivity : BaseActivity(), MainViewModelInterface {
                 .filter { text -> text.isNotEmpty() }
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe { term ->
-                    AnalyticsManager.getInstance().sendLog(JPEvent.Search(term.toString()))
+                    AnalyticsManager.sendLog(
+                        FirebaseAnalytics.Event.SEARCH,
+                        hashMapOf(
+                            FirebaseAnalytics.Param.SEARCH_TERM to term,
+                            "key_test" to "test합니다123"
+                        )
+                    )
                     mainViewModel.requestSearchImage(term, false)
                 }
         )
