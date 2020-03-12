@@ -8,6 +8,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.airbnb.lottie.LottieAnimationView
+import com.airbnb.lottie.LottieDrawable
 import com.eosr14.kakaoimagesearch.R
 import com.eosr14.kakaoimagesearch.common.VerticalMarginDecoration
 import com.eosr14.kakaoimagesearch.common.analytics.AnalyticsManager
@@ -40,6 +42,8 @@ class MainActivity : BaseActivity(), MainViewModelInterface {
     }
 
     private fun bindView() {
+        setUpAnimationView()
+
         val editText = Observable.create<CharSequence> { emitter ->
             edittext_main_search.run {
                 addTextChangedListener(onTextChangeListener { text -> emitter.onNext(text) })
@@ -80,8 +84,6 @@ class MainActivity : BaseActivity(), MainViewModelInterface {
             })
         }
 
-
-
         mainViewModel.isProgress.observe(this@MainActivity, Observer {
             it?.let { isProgress ->
                 when (isProgress) {
@@ -106,6 +108,15 @@ class MainActivity : BaseActivity(), MainViewModelInterface {
             override fun onTextChanged(text: CharSequence?, start: Int, before: Int, count: Int) {
                 text?.let { listener.invoke(it) }
             }
+        }
+    }
+
+    private fun setUpAnimationView() {
+//        AnimationR
+        anim_image.apply {
+            setAnimation("island.json")
+            repeatCount = LottieDrawable.INFINITE
+            playAnimation()
         }
     }
 
