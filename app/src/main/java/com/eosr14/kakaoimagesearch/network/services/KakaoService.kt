@@ -10,6 +10,9 @@ interface KakaoService {
 
     @Headers("Authorization: KakaoAK $KAKAO_REST_API_KEY")
     @GET("/v2/search/image")
-    fun requestKakaoSearch(@Query("query") query: String, @Query("page") page: Int): Single<KakaoImage>
+    fun requestKakaoSearch(
+        @Query("query") query: String,
+        @Query("page") page: Int
+    ): Single<KakaoImage>
 
 }

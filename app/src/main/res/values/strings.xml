@@ -4,4 +4,8 @@
     <string name="main_search_empty">%s와(과) 일치하는\n검색결과가 없습니다.</string>
     <string name="detail_display_name">%s | %s X %s</string>
     <string name="error_network_message">네트워크에 접속할 수 없습니다.\n네트워크 연결 상태를 확인해주세요.</string>
+
+    <string name="exit_dialog_message">앱을 종료하시겠습니까?</string>
+    <string name="exit_dialog_continue">계속하기</string>
+    <string name="exit_dialog_app_exit">종료</string>
 </resources>

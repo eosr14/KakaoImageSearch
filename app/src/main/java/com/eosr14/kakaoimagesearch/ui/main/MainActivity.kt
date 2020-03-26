@@ -1,5 +1,7 @@
 package com.eosr14.kakaoimagesearch.ui.main
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -8,9 +10,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.airbnb.lottie.LottieAnimationView
-import com.airbnb.lottie.LottieDrawable
 import com.eosr14.kakaoimagesearch.R
+import com.eosr14.kakaoimagesearch.common.ExitDialog
 import com.eosr14.kakaoimagesearch.common.VerticalMarginDecoration
 import com.eosr14.kakaoimagesearch.common.analytics.AnalyticsManager
 import com.eosr14.kakaoimagesearch.common.base.BaseActivity
@@ -41,9 +42,17 @@ class MainActivity : BaseActivity(), MainViewModelInterface {
         }
     }
 
-    private fun bindView() {
-        setUpAnimationView()
+    override fun onBackPressed() {
+        if (!this@MainActivity.isFinishing) {
+            ExitDialog(
+                this@MainActivity,
+                Runnable { finish() },
+                Runnable { }
+            ).show()
+        }
+    }
 
+    private fun bindView() {
         val editText = Observable.create<CharSequence> { emitter ->
             edittext_main_search.run {
                 addTextChangedListener(onTextChangeListener { text -> emitter.onNext(text) })
@@ -59,7 +68,7 @@ class MainActivity : BaseActivity(), MainViewModelInterface {
                         FirebaseAnalytics.Event.SEARCH,
                         hashMapOf(
                             FirebaseAnalytics.Param.SEARCH_TERM to term,
-                            "key_test" to "test합니다123"
+                            "key_test" to "test1234"
                         )
                     )
                     mainViewModel.requestSearchImage(term, false)
@@ -111,18 +120,15 @@ class MainActivity : BaseActivity(), MainViewModelInterface {
         }
     }
 
-    private fun setUpAnimationView() {
-//        AnimationR
-        anim_image.apply {
-            setAnimation("island.json")
-            repeatCount = LottieDrawable.INFINITE
-            playAnimation()
-        }
-    }
-
     // MainViewModelInterface [--
     override fun showErrorToast() = showNetworkErrorToast()
     // --] MainViewModelInterface
+
+    companion object {
+        fun startActivity(context: Context) {
+            context.startActivity(Intent(context, MainActivity::class.java))
+        }
+    }
 
 }
 

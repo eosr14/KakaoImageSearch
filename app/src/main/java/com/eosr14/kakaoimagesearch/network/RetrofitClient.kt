@@ -1,6 +1,5 @@
 package com.eosr14.kakaoimagesearch.network
 
-import android.util.Log
 import com.eosr14.kakaoimagesearch.BuildConfig
 import okhttp3.CookieJar
 import okhttp3.OkHttpClient
@@ -11,7 +10,6 @@ import okhttp3.logging.HttpLoggingInterceptor.Level.NONE
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
-
 
 class RetrofitClient {
 
