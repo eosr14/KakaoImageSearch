@@ -31,4 +31,5 @@ task clean(type: Delete) {
 ext {
     workVersion = "2.3.3"
     lottieVersion = "3.0.7"
+    billingVersion = "3.0.0"
 }

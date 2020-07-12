@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="inAppViewModel"
+            type="com.eosr14.kakaoimagesearch.ui.inapp.InAppViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="15dp"
+        tools:context=".ui.inapp.InAppActivity">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_in_app_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/in_app_title"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/tv_in_app_1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:onClick="@{() -> inAppViewModel.onClickTest1()}"
+            android:text="@string/in_app_text1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_in_app_title" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/tv_in_app_2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:onClick="@{() -> inAppViewModel.onClickTest2()}"
+            android:text="@string/in_app_text2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_in_app_1" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/tv_in_app_3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:onClick="@{() -> inAppViewModel.onClickTest3()}"
+            android:text="@string/in_app_text3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_in_app_2" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/tv_in_app_sub_standard"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:onClick="@{() -> inAppViewModel.onClickTestSubStandard()}"
+            android:text="@string/in_app_text_sub_standard"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_in_app_3" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/tv_in_app_sub_premium"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:onClick="@{() -> inAppViewModel.onClickTestSubPremium()}"
+            android:text="@string/in_app_text_sub_premium"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_in_app_sub_standard" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

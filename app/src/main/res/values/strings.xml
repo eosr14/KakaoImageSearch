@@ -8,4 +8,13 @@
     <string name="exit_dialog_message">앱을 종료하시겠습니까?</string>
     <string name="exit_dialog_continue">계속하기</string>
     <string name="exit_dialog_app_exit">종료</string>
+
+    <string name="in_app_text1">인앱 결제 테스트 1</string>
+    <string name="in_app_text2">인앱 결제 테스트 2</string>
+    <string name="in_app_text3">인앱 결제 테스트 3</string>
+    <string name="in_app_text_sub_standard">인앱 결제 테스트 (정기 결제 - 스탠다드)</string>
+    <string name="in_app_text_sub_premium">인앱 결제 테스트 (정기 결제 - 프리미엄)</string>
+    <string name="in_app_purchase_cancel">구매가 취소 되었습니다.</string>
+    <string name="in_app_purchase_unknown">현재는 구매가 불가능 합니다.</string>
+    <string name="in_app_title">인앱 결제 테스트 (Ver 3.0)</string>
 </resources>

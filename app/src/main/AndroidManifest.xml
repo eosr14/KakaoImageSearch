@@ -26,6 +26,7 @@
 
         <activity android:name=".ui.main.MainActivity" />
         <activity android:name=".ui.detail.DetailActivity" />
+        <activity android:name=".ui.inapp.InAppActivity" />
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"

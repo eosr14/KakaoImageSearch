@@ -18,6 +18,7 @@ import com.eosr14.kakaoimagesearch.common.base.BaseActivity
 import com.eosr14.kakaoimagesearch.common.base.BaseRecyclerViewAdapter
 import com.eosr14.kakaoimagesearch.databinding.ActivityMainBinding
 import com.eosr14.kakaoimagesearch.ui.detail.DetailActivity
+import com.eosr14.kakaoimagesearch.ui.inapp.InAppActivity
 import com.google.firebase.analytics.FirebaseAnalytics
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -122,6 +123,7 @@ class MainActivity : BaseActivity(), MainViewModelInterface {
 
     // MainViewModelInterface [--
     override fun showErrorToast() = showNetworkErrorToast()
+    override fun onClickInApp() = InAppActivity.startActivity(this@MainActivity)
     // --] MainViewModelInterface
 
     companion object {

@@ -14,10 +14,14 @@ android {
         applicationId "com.eosr14.kakaoimagesearch"
         minSdkVersion 19
         targetSdkVersion 29
-        versionCode 5
-        versionName "1.0.4"
+        versionCode 6
+        versionName "1.0.5"
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        ndk {
+            abiFilters "armeabi", "armeabi-v7a", "x86"
+        }
     }
 
     signingConfigs {
@@ -78,8 +82,8 @@ dependencies {
     implementation 'io.reactivex.rxjava2:rxjava:2.2.10'
 
     // Presco
-    implementation 'com.facebook.fresco:fresco:1.13.0'
-    implementation "com.facebook.fresco:imagepipeline-okhttp3:1.13.0"
+    implementation 'com.facebook.fresco:fresco:2.1.0'
+    implementation "com.facebook.fresco:imagepipeline-okhttp3:2.1.0"
 
     // Retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.6.2'
@@ -103,4 +107,8 @@ dependencies {
 
     // Lottie Animation
     implementation "com.airbnb.android:lottie:$lottieVersion"
+
+    // BillingClient
+    implementation "com.android.billingclient:billing:$billingVersion"
+    implementation "com.android.billingclient:billing-ktx:$billingVersion"
 }

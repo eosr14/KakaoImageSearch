@@ -60,4 +60,8 @@ class MainViewModel(
         }
     }
 
+    fun onClickInApp() {
+        mainViewModelInterface.onClickInApp()
+    }
+
 }
